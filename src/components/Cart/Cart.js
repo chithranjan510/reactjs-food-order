@@ -9,9 +9,14 @@ const Cart = (props) => {
 
   const cartCtx = useContext(CartContext);
 
-  const onRemoveCartHandler = (id) => {}
+  const onRemoveCartHandler = (id) => {
+    cartCtx.removeItem(id);
+  }
 
-  const onAddCartHandler = (item) => {}
+  const onAddCartHandler = (item) => {
+    item = {...item, amount: 1};
+    cartCtx.addItem(item);
+  }
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
@@ -28,7 +33,7 @@ const Cart = (props) => {
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>{`$${cartCtx.totalAmount}`}</span>
+        <span>{`$${cartCtx.totalAmount.toFixed(2)}`}</span>
       </div>
       <div className={classes.actions}>
         {cartHasItem && <button className={classes.button}>Order</button>}
